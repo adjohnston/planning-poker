@@ -19,7 +19,11 @@ export const Cards = memo(() => (
 
           return (
             <li key={key}>
-              <Card onClick={partial(playCard, key)}>{copy}</Card>
+              <Card onClick={partial(playCard, key)}>
+                <span role="img" aria-label={description}>
+                  {emoji}
+                </span>
+              </Card>
             </li>
           )
         })}
