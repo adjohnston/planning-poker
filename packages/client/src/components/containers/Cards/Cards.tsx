@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { partial } from '../../../helpers'
 import { cards } from '../../../constants'
 import { Actions } from '../../utils/WithActions/WithActions'
+import { Card } from '@planning-poker/components'
 
 export const Cards = memo(() => (
   <Actions>
@@ -9,15 +10,19 @@ export const Cards = memo(() => (
       <ul>
         {cards.fibonacci.map((number) => (
           <li key={number}>
-            <button onClick={partial(playCard, number)}>{number}</button>
+            <Card onClick={partial(playCard, number)}>{number}</Card>
           </li>
         ))}
 
-        {Object.entries(cards.misc).map(([key, copy]) => (
-          <li key={key}>
-            <button onClick={partial(playCard, key)}>{copy}</button>
-          </li>
-        ))}
+        {Object.entries(cards.misc).map(([key, card]) => {
+          const [emoji, description] = card
+
+          return (
+            <li key={key}>
+              <Card onClick={partial(playCard, key)}>{copy}</Card>
+            </li>
+          )
+        })}
       </ul>
     )}
   </Actions>
