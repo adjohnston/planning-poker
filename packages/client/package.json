@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@planning-poker/components": "^1.0.0",
     "@reach/router": "^1.2.1",
     "@types/jest": "24.0.12",
     "@types/node": "11.13.9",

@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "nodemon src/server.js"
+    "start": "npx nodemon src/server.js"
   },
   "dependencies": {
     "@types/socket.io-client": "^1.4.32",

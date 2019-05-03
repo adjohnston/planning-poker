@@ -7,10 +7,11 @@ import { ActionsProvider } from './components/utils/WithActions/WithActions'
 import '@planning-poker/components/dist/components.css'
 import './styles/index.css'
 
-render((
+render(
   <StateProvider>
     <ActionsProvider>
       <App />
     </ActionsProvider>
-  </StateProvider>
-), document.getElementById('root'))
+  </StateProvider>,
+  document.getElementById('root'),
+)

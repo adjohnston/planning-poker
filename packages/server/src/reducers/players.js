@@ -1,10 +1,15 @@
 const { JOIN_ROOM } = require('../types')
 
-const newPlayer = (id, isHost, state = {
+const newPlayer = (
   id,
-  host: isHost,
-  playerName: '',
-}, action) => {
+  isHost,
+  state = {
+    id,
+    isHost,
+    playerName: '',
+  },
+  action,
+) => {
   switch (action.type) {
     case JOIN_ROOM:
       return { ...state, playerName: action.payload.playerName }

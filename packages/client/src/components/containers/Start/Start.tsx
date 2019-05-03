@@ -4,22 +4,25 @@ import { compose } from '../../../helpers'
 import { updateField, roomCreated } from '../../../actions'
 import { withState } from '../../utils/WithState/WithState'
 import { Actions } from '../../utils/WithActions/WithActions'
+import { State } from '../../../interfaces'
 
-const isDisabled = (roomId) => roomId.length !== 3
+interface Props extends State {}
+
+const isDisabled = (roomId: number) => String(roomId).length !== 3
 
 export const Start = compose(
   memo,
   withState,
-)((props) => {
+)((props: Props) => {
   if (props.roomId !== 0) return <Redirect noThrow to="/name" />
 
-  const changeHandler = (event) => {
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     props.dispatch(updateField('roomId', value))
   }
 
   const navigateToName = () => {
-    props.dispatch(roomCreated(props.fields.roomId))
+    props.dispatch(roomCreated(Number(props.fields.roomId)))
     redirectTo('/name')
   }
 
@@ -34,17 +37,18 @@ export const Start = compose(
             <input
               type="text"
               onChange={changeHandler}
-              value={props.fields.roomId} />
+              value={props.fields.roomId}
+            />
           </label>
 
           <Actions>
-            { ({ joinRoom }) => (
+            {() => (
               <button
                 onClick={navigateToName}
-                disabled={isDisabled(props.fields.roomId)}>
+                disabled={isDisabled(Number(props.fields.roomId))}>
                 Join session
               </button>
-            ) }
+            )}
           </Actions>
         </fieldset>
       </form>
@@ -55,11 +59,9 @@ export const Start = compose(
         </p>
 
         <Actions>
-          { ({ createRoom }) => (
-            <button onClick={createRoom}>
-              Host session
-            </button>
-          ) }
+          {({ createRoom }) => (
+            <button onClick={() => createRoom()}>Host session</button>
+          )}
         </Actions>
       </Fragment>
     </Fragment>

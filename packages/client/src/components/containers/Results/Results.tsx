@@ -1,12 +1,8 @@
 import React, { memo, Fragment } from 'react'
-import { Player, Choices } from '../../../interfaces'
+import { State } from '../../../interfaces'
 import { Actions } from '../../utils/WithActions/WithActions'
 
-interface Props {
-  player: Player
-  players: Player[]
-  choices: Choices
-}
+interface Props extends Pick<State, 'player' | 'players' | 'choices'> {}
 
 export const Results = memo(({ player, players, choices }: Props) => {
   const cardIds = Object.keys(choices)
@@ -16,7 +12,7 @@ export const Results = memo(({ player, players, choices }: Props) => {
       {cardIds.length === 1 ? (
         <Fragment>
           <h2>The team has reached align-tenment! 🥳</h2>
-          <span>{cardIds.reduce((value, cardId) => cardId)}</span>
+          <span>{cardIds.reduce((_, cardId) => cardId)}</span>
         </Fragment>
       ) : (
         <Fragment>
@@ -41,11 +37,11 @@ export const Results = memo(({ player, players, choices }: Props) => {
         </Fragment>
       )}
 
-      { player.host && (
+      {player.isHost && (
         <Actions>
           {({ newRound }: any) => <button onClick={newRound}>New round</button>}
         </Actions>
-      ) }
+      )}
     </div>
   )
 })
