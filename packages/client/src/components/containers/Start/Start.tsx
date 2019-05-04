@@ -1,10 +1,11 @@
 import React, { memo, Fragment } from 'react'
 import { redirectTo, Redirect } from '@reach/router'
-import { compose } from '../../../helpers'
+import { compose, partial } from '../../../helpers'
+import { State } from '../../../interfaces'
 import { updateField, roomCreated } from '../../../actions'
 import { withState } from '../../utils/WithState/WithState'
 import { Actions } from '../../utils/WithActions/WithActions'
-import { State } from '../../../interfaces'
+import { Button, Form } from '@planning-poker/components'
 
 interface Props extends State {}
 
@@ -28,30 +29,26 @@ export const Start = compose(
 
   return (
     <Fragment>
-      <form>
-        <fieldset>
-          <legend>Join a planning poker session</legend>
-
-          <label>
-            <span>Session Pin</span>
-            <input
-              type="text"
-              onChange={changeHandler}
-              value={props.fields.roomId}
-            />
-          </label>
-
-          <Actions>
-            {() => (
-              <button
-                onClick={navigateToName}
-                disabled={isDisabled(Number(props.fields.roomId))}>
-                Join session
-              </button>
-            )}
-          </Actions>
-        </fieldset>
-      </form>
+      <Form
+        legend="Join a planning poker session"
+        fields={[
+          {
+            id: 'room-id',
+            label: 'Session pin',
+            onChange: changeHandler,
+            value: props.fields.roomId,
+          },
+        ]}>
+        <Actions>
+          {() => (
+            <Button
+              onClick={navigateToName}
+              disabled={isDisabled(Number(props.fields.roomId))}>
+              Join session
+            </Button>
+          )}
+        </Actions>
+      </Form>
 
       <Fragment>
         <p>
@@ -60,7 +57,7 @@ export const Start = compose(
 
         <Actions>
           {({ createRoom }) => (
-            <button onClick={() => createRoom()}>Host session</button>
+            <Button onClick={partial(createRoom)}>Host session</Button>
           )}
         </Actions>
       </Fragment>

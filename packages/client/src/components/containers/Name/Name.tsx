@@ -5,6 +5,7 @@ import { State } from '../../../interfaces'
 import { updateField } from '../../../actions'
 import { withState } from '../../utils/WithState/WithState'
 import { Actions } from '../../utils/WithActions/WithActions'
+import { Button, Form } from '@planning-poker/components'
 
 interface Props extends State {}
 
@@ -31,34 +32,26 @@ export const Name = compose(
         <span>{props.roomId}</span>
       </div>
 
-      <form onSubmit={(event) => event.preventDefault()}>
-        <fieldset>
-          <legend>Let others know who you are.</legend>
-
-          <label>
-            <span>Your name</span>
-            <input
-              type="text"
-              onChange={changeHandler(props.dispatch)}
-              value={props.fields.playerName}
-            />
-          </label>
-
-          <Actions>
-            {({ joinRoom }: any) => (
-              <button
-                onClick={partial(
-                  joinRoom,
-                  props.roomId,
-                  props.fields.playerName,
-                )}
-                disabled={isDisabled(props.fields.playerName)}>
-                Let’s go!
-              </button>
-            )}
-          </Actions>
-        </fieldset>
-      </form>
+      <Form
+        legend="Let others know who you are."
+        fields={[
+          {
+            id: 'your-name',
+            label: 'Your name',
+            onChange: changeHandler(props.dispatch),
+            value: props.fields.playerName,
+          },
+        ]}>
+        <Actions>
+          {({ joinRoom }: any) => (
+            <Button
+              onClick={partial(joinRoom, props.roomId, props.fields.playerName)}
+              disabled={isDisabled(props.fields.playerName)}>
+              Let’s go!
+            </Button>
+          )}
+        </Actions>
+      </Form>
     </section>
   )
 })
