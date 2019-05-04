@@ -34,6 +34,7 @@ export const Start = compose(
         fields={[
           {
             id: 'room-id',
+            type: 'number',
             label: 'Session pin',
             onChange: changeHandler,
             value: props.fields.roomId,
