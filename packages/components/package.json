@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "source": "src/index.ts",
-  "types": "dist/types.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "microbundle --jsx react --globals react=React",
     "dev": "microbundle watch --jsx react --globals react=React"
   },
   "devDependencies": {
     "@types/styled-components": "^4.1.14",
-    "microbundle": "^0.11.0"
+    "microbundle": "^0.11.0",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
   },
   "peerDependencies": {
     "react": "^16.7.0"
