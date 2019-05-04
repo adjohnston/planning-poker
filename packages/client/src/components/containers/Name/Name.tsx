@@ -28,8 +28,7 @@ export const Name = compose(
   return (
     <section>
       <div>
-        <span>Your pin!</span>
-        <span>{props.roomId}</span>
+        <span>Your pin!</span> <strong>{props.roomId}</strong>
       </div>
 
       <Form
