@@ -5,8 +5,8 @@
   "source": "src/index.ts",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "microbundle --jsx react --globals react=React",
-    "dev": "microbundle watch --jsx react --globals react=React"
+    "build": "microbundle",
+    "dev": "microbundle watch"
   },
   "devDependencies": {
     "@types/styled-components": "^4.1.14",
