@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Inner } from './Card.styles'
 
-interface Props {
+export interface Props {
   clickHandler: React.EventHandler<React.SyntheticEvent<HTMLButtonElement>>
   children: React.ReactChildren
 }
