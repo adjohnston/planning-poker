@@ -11,7 +11,12 @@ export const Results = memo(({ player, players, choices }: Props) => {
     <div>
       {cardIds.length === 1 ? (
         <Fragment>
-          <h2>The team has reached align-tenment! 🥳</h2>
+          <h2>
+            The team has reached align-tenment!{' '}
+            <span role="img" aria-label="Celebrate">
+              🥳
+            </span>
+          </h2>
           <span>{cardIds.reduce((_, cardId) => cardId)}</span>
         </Fragment>
       ) : (
