@@ -14,7 +14,8 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "3.0.0",
-    "socket.io-client": "^2.2.0"
+    "socket.io-client": "^2.2.0",
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {
     "@types/jest": "24.0.12",
@@ -23,6 +24,7 @@
     "@types/react": "16.8.15",
     "@types/react-dom": "16.8.4",
     "@types/socket.io-client": "^1.4.32",
+    "@types/styled-components": "^4.1.14",
     "tslint": "^5.16.0",
     "typescript": "^3.4.5"
   },
