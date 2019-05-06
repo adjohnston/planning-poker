@@ -1,13 +1,14 @@
 import React, { memo } from 'react'
-import { Card, List } from '@planning-poker/components'
+import { Card } from '@planning-poker/components'
 import { partial } from '../../../helpers'
 import { cards } from '../../../constants'
 import { Actions } from '../../utils/WithActions/WithActions'
+import { Hand } from './Cards.styles'
 
 export const Cards = memo(() => (
   <Actions>
     {({ playCard }): React.ReactElement => (
-      <List
+      <Hand
         items={[
           ...cards.fibonacci.map((number) => (
             <Card key={number} onClick={partial(playCard, number)}>
