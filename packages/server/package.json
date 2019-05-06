@@ -1,15 +1,20 @@
 {
-  "name": "server",
+  "name": "@planning-poker/server",
   "version": "1.0.0",
   "description": "the backend of planning poker",
   "main": "src/server.js",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "nodemon src/server.js"
+    "start": "npx nodemon src/server.js"
   },
   "dependencies": {
+    "@types/socket.io-client": "^1.4.32",
     "redux": "^4.0.1",
     "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
   }
 }

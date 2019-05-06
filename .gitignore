@@ -1,3 +1,9 @@
+# dependencies
 node_modules
-packages/*/node_modules
-package-lock.json
+
+# builds
+dist
+.rts*
+
+# logs
+yarn-error.log

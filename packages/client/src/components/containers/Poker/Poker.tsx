@@ -1,21 +1,25 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Redirect } from '@reach/router'
-import { Player, Choices } from '../../../interfaces'
+import { State } from '../../../interfaces'
 import { withState } from '../../utils/WithState/WithState'
 import { Cards } from '../Cards/Cards'
 import { Waiting } from '../Waiting/Waiting'
 import { Results } from '../Results/Results'
+import { compose } from '../../../helpers'
 
-interface Props {
-  player: Player
-  players: Player[]
-  hasChosen: boolean
-  isWaiting: boolean
-  choices: Choices
-}
+interface Props extends State {}
 
-export const Poker = withState(
-  ({ player, players, choices, hasChosen, isWaiting }: Props) => {
+export const Poker = compose(
+  memo,
+  withState,
+)(
+  ({
+    player,
+    players,
+    choices,
+    hasChosen,
+    isWaiting,
+  }: Props): React.ReactElement => {
     if (!player || !player.id) return <Redirect noThrow to="/" />
 
     return (

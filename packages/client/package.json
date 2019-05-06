@@ -1,31 +1,35 @@
 {
-  "name": "client",
-  "version": "0.1.0",
+  "name": "@planning-poker/client",
+  "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "@reach/router": "^1.2.1",
-    "@types/jest": "23.3.10",
-    "@types/node": "10.12.18",
-    "@types/reach__router": "^1.2.2",
-    "@types/react": "16.7.18",
-    "@types/react-dom": "16.0.11",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "react-scripts": "2.1.2",
-    "socket.io-client": "^2.2.0",
-    "typescript": "3.2.2"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "@planning-poker/components": "^1.0.0",
+    "@reach/router": "^1.2.1",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-scripts": "3.0.0",
+    "socket.io-client": "^2.2.0",
+    "styled-components": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.12",
+    "@types/node": "11.13.9",
+    "@types/reach__router": "^1.2.2",
+    "@types/react": "16.8.15",
+    "@types/react-dom": "16.8.4",
+    "@types/socket.io-client": "^1.4.32",
+    "@types/styled-components": "^4.1.14",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
   },
   "browserslist": [
-    ">0.2%",
+    ">2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"

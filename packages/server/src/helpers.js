@@ -21,16 +21,12 @@ function countChoices(choices = {}) {
 
 function createRoomId(rooms) {
   const id = generateId()
-  return !collectionContainsKey(rooms, id)
-    ? id
-    : createRoomId(rooms)
+  return !collectionContainsKey(rooms, id) ? id : createRoomId(rooms)
 }
 
 function createPlayerId(players) {
   const id = generateId(0)
-  return !collectionContainsKey(players, id)
-    ? id
-    : createPlayerId(players)
+  return !collectionContainsKey(players, id) ? id : createPlayerId(players)
 }
 
 module.exports = {

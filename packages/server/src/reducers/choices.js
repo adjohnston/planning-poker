@@ -1,6 +1,4 @@
-const {
-  PLAY_CARD
-} = require('../types')
+const { PLAY_CARD } = require('../types')
 
 const newChoice = (state = [], action) => {
   switch (action.type) {
@@ -16,9 +14,7 @@ const choices = (state = {}, action) => {
   switch (action.type) {
     case PLAY_CARD:
       const cardId = action.payload.cardId
-      return { ...state,
-        [cardId]: [...newChoice(state[cardId], action)]
-      }
+      return { ...state, [cardId]: [...newChoice(state[cardId], action)] }
 
     default:
       return state
@@ -26,5 +22,5 @@ const choices = (state = {}, action) => {
 }
 
 module.exports = {
-  choices
+  choices,
 }

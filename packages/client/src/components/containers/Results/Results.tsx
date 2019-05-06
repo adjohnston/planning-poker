@@ -1,12 +1,9 @@
 import React, { memo, Fragment } from 'react'
-import { Player, Choices } from '../../../interfaces'
+import { List } from '@planning-poker/components'
+import { State } from '../../../interfaces'
 import { Actions } from '../../utils/WithActions/WithActions'
 
-interface Props {
-  player: Player
-  players: Player[]
-  choices: Choices
-}
+export interface Props extends Pick<State, 'player' | 'players' | 'choices'> {}
 
 export const Results = memo(({ player, players, choices }: Props) => {
   const cardIds = Object.keys(choices)
@@ -15,37 +12,45 @@ export const Results = memo(({ player, players, choices }: Props) => {
     <div>
       {cardIds.length === 1 ? (
         <Fragment>
-          <h2>The team has reached align-tenment! 🥳</h2>
-          <span>{cardIds.reduce((value, cardId) => cardId)}</span>
+          <h2>
+            The team has reached align-tenment!{' '}
+            <span role="img" aria-label="Celebrate">
+              🥳
+            </span>
+          </h2>
+          <span>{cardIds.reduce((_, cardId) => cardId)}</span>
         </Fragment>
       ) : (
         <Fragment>
           <h2>Choices</h2>
-          <ul>
-            {cardIds.map((cardId) => (
+          <List
+            items={cardIds.map((cardId) => (
               <li key={cardId}>
                 <span>{cardId}</span>
 
                 <div>
                   {choices[cardId].map((playerId) => {
-                    const { playerName } = players.find(
+                    const player = players.find(
                       (player) => player.id === playerId,
-                    )!
+                    )
 
-                    return <span key={playerId}>{playerName}</span>
+                    if (player)
+                      return <span key={playerId}>{player.playerName}</span>
+
+                    return null
                   })}
                 </div>
               </li>
             ))}
-          </ul>
+          />
         </Fragment>
       )}
 
-      { player.host && (
+      {player.isHost && (
         <Actions>
           {({ newRound }: any) => <button onClick={newRound}>New round</button>}
         </Actions>
-      ) }
+      )}
     </div>
   )
 })

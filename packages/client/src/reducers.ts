@@ -1,6 +1,7 @@
 import { types } from './types'
+import { State, Action } from './interfaces'
 
-export const reducers = (state, action) => {
+export const reducers = (state: State, action: Action) => {
   switch (action.type) {
     case types.ROOM_CREATED:
       return { roomId: action.payload }
@@ -15,7 +16,7 @@ export const reducers = (state, action) => {
           [action.payload.field]: action.payload.value,
         },
       }
-    
+
     case types.UPDATE_STATE:
       return { ...state, ...action.payload }
 
@@ -27,7 +28,7 @@ export const reducers = (state, action) => {
 
     case types.START_ROUND:
       return {
-        choices: action.payload.choices, 
+        choices: action.payload && action.payload.choices,
         hasChosen: action.payload.hasChosen,
       }
 

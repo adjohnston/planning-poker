@@ -1,24 +1,15 @@
 import React, { memo } from 'react'
 import { Redirect } from '@reach/router'
+import { Button, Form } from '@planning-poker/components'
 import { compose, partial } from '../../../helpers'
-import { Player } from '../../../interfaces'
+import { State } from '../../../interfaces'
 import { updateField } from '../../../actions'
 import { withState } from '../../utils/WithState/WithState'
 import { Actions } from '../../utils/WithActions/WithActions'
 
-interface FieldProps {
-  playerName: string
-}
+interface Props extends State {}
 
-interface Props {
-  roomId: number,
-  player: Player,
-  players: Player[],
-  fields: FieldProps,
-  dispatch: Function,
-}
-
-const isDisabled = (playerName: string) => playerName.length <= 2
+const isDisabled = (name: string) => name.length <= 2
 
 export const Name = compose(
   memo,
@@ -27,45 +18,39 @@ export const Name = compose(
   if (props.roomId === 0) return <Redirect noThrow to="/" />
   if (props.player && props.player.id) return <Redirect noThrow to="/lobby" />
 
-  const changeHandler =
-    (dispatch: Function) =>
-    (event: React.FormEvent<HTMLInputElement>): void => {
-      const value = event.currentTarget.value
-      props.dispatch(updateField('playerName', value))
-    }
+  const changeHandler = (dispatch: Function) => (
+    event: React.FormEvent<HTMLInputElement>,
+  ): void => {
+    const value = event.currentTarget.value
+    dispatch(updateField('playerName', value))
+  }
 
   return (
     <section>
       <div>
-        <span>Your pin!</span>
-        <span>{props.roomId}</span>
+        <span>Your pin!</span> <strong>{props.roomId}</strong>
       </div>
 
-      <form onSubmit={(event) => event.preventDefault()}>
-        <fieldset>
-          <legend>Let others know who you are.</legend>
-
-          <label>
-            <span>Your name</span>
-            <input
-              type="text"
-              onChange={changeHandler(props.dispatch)}
-              value={props.fields.playerName} />
-          </label>
-
-          <Actions>
-            { ({ joinRoom }: any) => (
-              <button
-                onClick={partial(
-                  joinRoom, props.roomId, props.fields.playerName,
-                )}
-                disabled={isDisabled(props.fields.playerName)}>
-                Let’s go!
-              </button>
-            ) }
-          </Actions>
-        </fieldset>
-      </form>
+      <Form
+        legend="Let others know who you are."
+        fields={[
+          {
+            id: 'your-name',
+            label: 'Your name',
+            onChange: changeHandler(props.dispatch),
+            value: props.fields.playerName,
+          },
+        ]}>
+        <Actions>
+          {({ joinRoom }: any) => (
+            <Button
+              onClick={partial(joinRoom, props.roomId, props.fields.playerName)}
+              disabled={isDisabled(props.fields.playerName)}>
+              Let’s go!
+            </Button>
+          )}
+        </Actions>
+      </Form>
     </section>
   )
 })

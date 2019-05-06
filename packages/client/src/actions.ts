@@ -1,17 +1,7 @@
 import { types } from './types'
+import { Action, Player, Fields } from './interfaces'
 
-interface Action {
-  type: string,
-  payload?: any,
-}
-
-interface Player {
-  id: string,
-  host: boolean,
-  name: string,
-}
-
-export const updateField = (field: string, value: string): Action => ({
+export const updateField = (field: Fields, value: string): Action => ({
   type: types.UPDATE_FIELD,
   payload: { field, value },
 })

@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { Player, Choices } from '../../../interfaces'
+import { State } from '../../../interfaces'
 import {
   compose,
   partial,
@@ -8,10 +8,7 @@ import {
   getPlayerIdsFromChoices,
 } from '../../../helpers'
 
-interface Props {
-  players: Player[]
-  choices: Choices
-}
+interface Props extends Pick<State, 'players' | 'choices'> {}
 
 export const Waiting = memo(({ players, choices }: Props) => (
   <div>

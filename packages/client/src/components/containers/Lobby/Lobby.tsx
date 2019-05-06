@@ -1,14 +1,12 @@
 import React, { memo } from 'react'
 import { Redirect } from '@reach/router'
-import { compose } from '../../../helpers'
-import { Player } from '../../../interfaces'
+import { Button, List } from '@planning-poker/components'
+import { compose, partial, prop } from '../../../helpers'
+import { State } from '../../../interfaces'
 import { withState } from '../../utils/WithState/WithState'
 import { Actions } from '../../utils/WithActions/WithActions'
 
-interface Props {
-  player: Player
-  players: Player[]
-}
+export interface Props extends Pick<State, 'player' | 'players'> {}
 
 export const Lobby = compose(
   memo,
@@ -19,17 +17,15 @@ export const Lobby = compose(
 
     return (
       <section>
-        {player.host && <Actions>
-            {({ startSession }: any): any => (
-              <button onClick={startSession}>Start session</button>
-            )}
-          </Actions>}
+        <List items={prop(players, 'playerName')} />
 
-        <ul>
-          {players.map((player: Player) => (
-            <li key={player.id}>{player.playerName}</li>
-          ))}
-        </ul>
+        {player.isHost && (
+          <Actions>
+            {({ startSession }): React.ReactElement => (
+              <Button onClick={partial(startSession)}>Start session</Button>
+            )}
+          </Actions>
+        )}
       </section>
     )
   },

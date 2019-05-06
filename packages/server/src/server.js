@@ -36,8 +36,10 @@ io.on('connect', (socket) => {
     store.dispatch(socket.actions.joinRoom(socket.playerId, playerName))
 
     const updatedPlayers = store.getState()[roomId].players
-    
-    io.to(roomId).emit(types.UPDATE_PLAYERS, { players: Object.values(updatedPlayers) })
+
+    io.to(roomId).emit(types.UPDATE_PLAYERS, {
+      players: Object.values(updatedPlayers),
+    })
     socket.emit(types.ROOM_JOINED, { player: updatedPlayers[socket.playerId] })
   })
 
@@ -50,9 +52,9 @@ io.on('connect', (socket) => {
     socket.emit(types.UPDATE_STATE, { hasChosen: true, isWaiting: true })
 
     const { players, choices } = store.getState()[socket.roomId]
-    
+
     io.to(socket.roomId).emit(types.UPDATE_CHOICES, { choices })
-    
+
     if (countPlayers(players) === countChoices(choices)) {
       io.to(socket.roomId).emit(types.UPDATE_STATE, { isWaiting: false })
     }
@@ -62,8 +64,8 @@ io.on('connect', (socket) => {
     store.dispatch(socket.actions.newRound())
 
     const choices = store.getState()[socket.roomId].choices
-    
-    io.to(socket.roomId).emit(types.START_ROUND, { 
+
+    io.to(socket.roomId).emit(types.START_ROUND, {
       choices,
       hasChosen: false,
     })

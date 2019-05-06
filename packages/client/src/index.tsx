@@ -1,13 +1,16 @@
 import React from 'react'
 import { render } from 'react-dom'
-import App from './components/App/App'
-import { StateProvider } from './components/WithState/WithState'
-import { ActionsProvider } from './components/WithActions/WithActions'
+import App from './components/containers/App/App'
+import { StateProvider } from './components/utils/WithState/WithState'
+import { ActionsProvider } from './components/utils/WithActions/WithActions'
 
-render((
+import './styles/index.css'
+
+render(
   <StateProvider>
     <ActionsProvider>
       <App />
     </ActionsProvider>
-  </StateProvider>
-), document.getElementById('root'))
+  </StateProvider>,
+  document.getElementById('root'),
+)
