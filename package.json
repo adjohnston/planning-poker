@@ -2,9 +2,4 @@
   "name": "planning-poker",
   "private": true,
   "workspaces": [
-    "packages/*"
-  ],
-  "devDependencies": {
-    "lerna": "^3.13.4"
-  }
 }
