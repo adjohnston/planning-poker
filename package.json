@@ -2,4 +2,8 @@
   "name": "planning-poker",
   "private": true,
   "workspaces": [
+    "client",
+    "server",
+    "components"
+  ]
 }
