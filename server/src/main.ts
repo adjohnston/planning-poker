@@ -1,13 +1,21 @@
-import { createServer } from 'http'
-import { Server } from 'socket.io'
+import { createServer, Server } from 'http'
+import { Server as SocketServer } from 'socket.io'
+import { config } from './config'
+import { io } from './io'
+import { listeners } from './listeners'
 
-const server = createServer()
-const io = new Server(server)
+const server: Server = createServer()
 
-io.on('connect', socket => {
-  socket.on('HI', () => {
-    socket.emit('WAVE')
-  })
-})
+type Main = (s: Server) => (io: SocketServer) => void
 
-server.listen(8080, () => console.log('I live'))
+const main: Main = server => io => {
+  listeners(io)
+
+  server.listen(config.port, () =>
+    console.log(`Server running on port: ${config.port}`),
+  )
+}
+
+if (require.main) {
+  main(server)(io(server))
+}
